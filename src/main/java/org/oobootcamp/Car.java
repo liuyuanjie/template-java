@@ -5,12 +5,10 @@ public class Car {
 
     public Car()
     {
-
     }
 
     public void pickCar()
     {
-
         hasBeenPicked = true;
     }
 }

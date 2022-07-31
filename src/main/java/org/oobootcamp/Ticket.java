@@ -1,11 +1,11 @@
 package org.oobootcamp;
 
+import java.util.UUID;
+
 public class Ticket {
-    boolean isPicked ;
+    UUID ticketNo;
 
-    public void pick()
-    {
-        isPicked = true;
+    public Ticket() {
+        ticketNo = UUID.randomUUID();
     }
-
 }

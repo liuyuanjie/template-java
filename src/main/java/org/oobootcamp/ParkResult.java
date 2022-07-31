@@ -2,13 +2,24 @@ package org.oobootcamp;
 
 public class ParkResult
 {
-    Ticket _ticket;
+    Ticket ticket;
+    String message;
 
-    public ParkResult(Ticket ticket) {
-        _ticket = ticket;
+    public ParkResult(Ticket ticket)
+    {
+        if(ticket == null)
+        {
+            message = "Parking lot is full, parking failed.";
+        }
+        this.ticket = ticket;
     }
 
-    public boolean HasTicket() {
-        return _ticket != null;
+    public boolean hasTicket() {
+        return ticket != null;
+    }
+
+    public String message()
+    {
+        return message;
     }
 }

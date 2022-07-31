@@ -1,10 +1,19 @@
 package org.oobootcamp;
 
 public class Car {
-    boolean hasBeenPicked = false;
+    private CarStatus carStatus;
 
     public void pick()
     {
-        hasBeenPicked = true;
+        carStatus = CarStatus.PICKED;
+    }
+
+    public void park()
+    {
+        carStatus = CarStatus.IN_PARKING;
+    }
+
+    public boolean hasPicked(){
+        return carStatus == CarStatus.PICKED;
     }
 }

@@ -3,23 +3,25 @@ package org.oobootcamp;
 import java.util.HashMap;
 
 public class ParkingLot {
-    int capability;
-    HashMap<Ticket, Car> parkedCars = new HashMap<>();
+    private int totalParkingAmount;
+    private HashMap<Ticket, Car> parkedCars = new HashMap<>();
     String name;
 
-    public ParkingLot(int capability) {
-        this.capability = capability;
+    public ParkingLot(int parkingAmount) {
+        this.totalParkingAmount = parkingAmount;
     }
 
-    public ParkingLot(String name, int capability) {
+    public ParkingLot(String name, int parkingAmount) {
         this.name = name;
-        this.capability = capability;
+        this.totalParkingAmount = parkingAmount;
     }
 
     ParkResult park(Car car) {
-        if (HasFreeParking()) {
-            return new ParkResult(null);
+        if (!HasFreeParking()) {
+            return new ParkResult();
         }
+
+        car.park();
 
         var ticket = new Ticket(this);
         parkedCars.put(ticket, car);
@@ -29,31 +31,22 @@ public class ParkingLot {
 
     public PickResult pick(Ticket ticket) {
         if (!parkedCars.containsKey(ticket)) {
-            return new PickResult(PickCarStatus.InvalidTicket);
+            return new PickResult(PickStatus.INVALID_TICKET);
         }
 
         Car car = parkedCars.get(ticket);
-        if (car.hasBeenPicked) {
-            return new PickResult(PickCarStatus.ExpiredTicket);
+        if (car.hasPicked()) {
+            return new PickResult(PickStatus.EXPIRED_TICKET);
         }
 
         car.pick();
-        return new PickResult(car, PickCarStatus.Success);
-    }
 
-    private int getFreeParkingAmount() {
-        int count = 0;
-        for (Car car : parkedCars.values()) {
-            if (car.hasBeenPicked) {
-                continue;
-            }
-            count++;
-        }
-
-        return count;
+        return new PickResult(car, PickStatus.VALID_TICKET);
     }
 
     private boolean HasFreeParking() {
-        return getFreeParkingAmount() >= capability;
+        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> !x.hasPicked()).count();
+
+        return inPackingAmount < totalParkingAmount;
     }
 }

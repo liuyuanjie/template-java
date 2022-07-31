@@ -12,17 +12,16 @@ public class GraduateParkingBoy {
     public ParkResult park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
             ParkResult parkResult = parkingLot.park(car);
-            if (parkResult.hasTicket()) {
+            if (parkResult.isSuccess()) {
                 return parkResult;
             }
         }
 
-        return new ParkResult(null);
+        return new ParkResult();
     }
 
     public PickResult pick(Ticket ticket) {
         PickResult pickResult = null;
-
         for (ParkingLot parkingLot : parkingLots) {
             PickResult itemResult = parkingLot.pick(ticket);
             if (itemResult.isParkingLotTicket()) {

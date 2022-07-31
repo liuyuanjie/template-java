@@ -17,7 +17,7 @@ public class ParkingLot {
     }
 
     ParkResult park(Car car) {
-        if (HasFreeParkingPlace()) {
+        if (HasFreeParking()) {
             return new ParkResult(null);
         }
 
@@ -25,10 +25,6 @@ public class ParkingLot {
         parkedCars.put(ticket, car);
 
         return new ParkResult(ticket);
-    }
-
-    public boolean HasFreeParkingPlace() {
-        return getFreeCapability() >= capability;
     }
 
     public PickResult pick(Ticket ticket) {
@@ -41,21 +37,23 @@ public class ParkingLot {
             return new PickResult(PickCarStatus.ExpiredTicket);
         }
 
-        car.pickCar();
+        car.pick();
         return new PickResult(car, PickCarStatus.Success);
     }
 
-    private int getFreeCapability() {
-
+    private int getFreeParkingAmount() {
         int count = 0;
-
         for (Car car : parkedCars.values()) {
-            if (car.hasBeenPicked)
+            if (car.hasBeenPicked) {
                 continue;
-
+            }
             count++;
         }
 
         return count;
+    }
+
+    private boolean HasFreeParking() {
+        return getFreeParkingAmount() >= capability;
     }
 }

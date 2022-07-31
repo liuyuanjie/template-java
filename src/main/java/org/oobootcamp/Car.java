@@ -3,11 +3,7 @@ package org.oobootcamp;
 public class Car {
     boolean hasBeenPicked = false;
 
-    public Car()
-    {
-    }
-
-    public void pickCar()
+    public void pick()
     {
         hasBeenPicked = true;
     }

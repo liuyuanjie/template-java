@@ -2,7 +2,7 @@ package org.oobootcamp;
 
 public class ParkResult {
     Ticket ticket;
-    String message;
+    private String message;
 
     public ParkResult(Ticket ticket) {
         if (ticket == null) {
@@ -15,7 +15,7 @@ public class ParkResult {
         return ticket != null;
     }
 
-    public String message() {
+    public String getMessage() {
         return message;
     }
 }

@@ -48,7 +48,7 @@ public class ParkingLotTest {
 
         // Assert
         assertThat(parkResult.hasTicket()).isFalse();
-        assertThat(parkResult.message()).isEqualTo("Parking lot is full, parking failed.");
+        assertThat(parkResult.getMessage()).isEqualTo("Parking lot is full, parking failed.");
     }
 
     @Test

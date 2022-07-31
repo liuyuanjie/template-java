@@ -21,13 +21,17 @@ public class GraduateParkingBoy {
     }
 
     public PickResult pick(Ticket ticket) {
+        PickResult pickResult = null;
+
         for (ParkingLot parkingLot : parkingLots) {
-            PickResult pickResult = parkingLot.pick(ticket);
-            if (pickResult.isParkingLotTicket()) {
-                return pickResult;
+            PickResult itemResult = parkingLot.pick(ticket);
+            if (itemResult.isParkingLotTicket()) {
+                pickResult = itemResult;
+                break;
             }
+            pickResult = itemResult;
         }
 
-        return new PickResult(PickCarStatus.InvalidTicket);
+        return pickResult;
     }
 }

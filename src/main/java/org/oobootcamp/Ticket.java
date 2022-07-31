@@ -4,8 +4,10 @@ import java.util.UUID;
 
 public class Ticket {
     UUID ticketNo;
+    ParkingLot parkingLot;
 
-    public Ticket() {
+    public Ticket(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
         ticketNo = UUID.randomUUID();
     }
 }

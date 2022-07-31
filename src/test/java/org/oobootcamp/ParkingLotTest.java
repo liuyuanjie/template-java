@@ -72,14 +72,14 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkResult parkResult = parkingLot.park(car);
 
-        Ticket fakeTicket = new Ticket();
+        Ticket fakeTicket = new Ticket(parkingLot);
 
         // Act
         PickResult pickResult = parkingLot.pick(fakeTicket);
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
-        assertThat(pickResult.message).isEqualTo("Invalid ticket");
+        assertThat(pickResult.getMessage()).isEqualTo("Invalid ticket");
     }
 
     @Test
@@ -95,6 +95,6 @@ public class ParkingLotTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
-        assertThat(pickResult.message).isEqualTo("This ticket has been used, the car has been picked");
+        assertThat(pickResult.getMessage()).isEqualTo("This ticket has been used, the car has been picked");
     }
 }

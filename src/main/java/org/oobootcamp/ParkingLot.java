@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class ParkingLot {
     private int totalParkingAmount;
     private HashMap<Ticket, Car> parkedCars = new HashMap<>();
-    String name;
+    private String name;
 
     public ParkingLot(int parkingAmount) {
         this.totalParkingAmount = parkingAmount;
@@ -45,6 +45,10 @@ public class ParkingLot {
         car.pick();
 
         return new PickResult(car, PickStatus.VALID_TICKET);
+    }
+
+    public String getName() {
+        return name;
     }
 
     private boolean HasFreeParking() {

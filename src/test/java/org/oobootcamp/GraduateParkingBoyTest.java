@@ -23,7 +23,7 @@ public class GraduateParkingBoyTest {
 
         // Assert
         assertThat(parkResult.isSuccess()).isTrue();
-        assertThat(parkResult.getTicket().getParkingLot().name).isEqualTo("A");
+        assertThat(parkResult.getTicket().getParkingLot().getName()).isEqualTo("A");
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GraduateParkingBoyTest {
 
         // Assert
         assertThat(parkResult.isSuccess()).isTrue();
-        assertThat(parkResult.getTicket().getParkingLot().name).isEqualTo("C");
+        assertThat(parkResult.getTicket().getParkingLot().getName()).isEqualTo("C");
     }
 
     @Test

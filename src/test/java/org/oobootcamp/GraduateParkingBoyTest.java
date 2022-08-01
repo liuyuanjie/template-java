@@ -68,9 +68,7 @@ public class GraduateParkingBoyTest {
         parkingLotC.park(new Car());
         parkingLots.add(parkingLotC);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(
-                parkingLots
-        );
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
         Car car = new Car();
 
         // Act

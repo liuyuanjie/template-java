@@ -1,5 +1,7 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Status.PickStatus;
+
 import static org.oobootcamp.Constants.*;
 
 public class PickResult {
@@ -36,7 +38,7 @@ public class PickResult {
     }
 
     public boolean isSuccess() {
-        return this.car != null;
+        return this.pickStatus == PickStatus.VALID_TICKET;
     }
 
     public boolean isParkingLotTicket(){

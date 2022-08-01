@@ -1,5 +1,8 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Status.ParkStatus;
+import org.oobootcamp.Status.PickStatus;
+
 import java.util.HashMap;
 
 public class ParkingLot {
@@ -18,7 +21,7 @@ public class ParkingLot {
 
     ParkResult park(Car car) {
         if (!HasFreeParking()) {
-            return new ParkResult();
+            return new ParkResult(ParkStatus.FAILURE);
         }
 
         car.park();
@@ -26,7 +29,7 @@ public class ParkingLot {
         var ticket = new Ticket(this);
         parkedCars.put(ticket, car);
 
-        return new ParkResult(ticket);
+        return new ParkResult(ticket, ParkStatus.SUCCESS);
     }
 
     public PickResult pick(Ticket ticket) {

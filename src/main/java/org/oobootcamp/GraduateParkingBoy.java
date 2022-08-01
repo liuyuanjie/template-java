@@ -1,5 +1,7 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Status.ParkStatus;
+
 import java.util.ArrayList;
 
 public class GraduateParkingBoy {
@@ -17,7 +19,7 @@ public class GraduateParkingBoy {
             }
         }
 
-        return new ParkResult();
+        return new ParkResult(ParkStatus.FAILURE);
     }
 
     public PickResult pick(Ticket ticket) {

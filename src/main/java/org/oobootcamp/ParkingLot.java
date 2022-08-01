@@ -1,7 +1,7 @@
 package org.oobootcamp;
 
-import org.oobootcamp.Status.ParkStatus;
-import org.oobootcamp.Status.PickStatus;
+import org.oobootcamp.status.ParkStatus;
+import org.oobootcamp.status.PickStatus;
 
 import java.util.HashMap;
 

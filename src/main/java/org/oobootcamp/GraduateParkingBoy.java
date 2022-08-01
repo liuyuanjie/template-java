@@ -1,6 +1,6 @@
 package org.oobootcamp;
 
-import org.oobootcamp.Status.ParkStatus;
+import org.oobootcamp.status.ParkStatus;
 
 import java.util.ArrayList;
 

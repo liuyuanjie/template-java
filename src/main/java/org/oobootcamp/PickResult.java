@@ -1,6 +1,6 @@
 package org.oobootcamp;
 
-import org.oobootcamp.Status.PickStatus;
+import org.oobootcamp.status.PickStatus;
 
 import static org.oobootcamp.Constants.*;
 

@@ -1,4 +1,4 @@
-package org.oobootcamp.Status;
+package org.oobootcamp.status;
 
 public enum CarStatus {
     IN_PARKING,

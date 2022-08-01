@@ -1,6 +1,6 @@
 package org.oobootcamp;
 
-import org.oobootcamp.Status.CarStatus;
+import org.oobootcamp.status.CarStatus;
 
 public class Car {
     private CarStatus carStatus;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraduateParkingBoy {
-    private List<ParkingLot> parkingLots;
+    protected List<ParkingLot> parkingLots;
 
     public GraduateParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;

@@ -46,4 +46,10 @@ public class ParkingLot {
 
         return inPackingAmount < capacity;
     }
+
+    public int remaindingSpace() {
+        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> x.GetInPacking()).count();
+
+        return capacity - inPackingAmount ;
+    }
 }

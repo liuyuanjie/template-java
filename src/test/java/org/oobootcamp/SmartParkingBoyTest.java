@@ -1,51 +1,51 @@
 package org.oobootcamp;
 
-import org.assertj.core.internal.bytebuddy.agent.builder.AgentBuilder;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.oobootcamp.Constants.*;
 
-public class GraduateParkingBoyTest {
+public class SmartParkingBoyTest {
     @Test
-    void should_return_packing_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_is_1() {
+    void should_return_packing_success_into_B_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_B_have_most_empty_parking_spaces() {
         // Arrange
-        ParkingLot parkingLotA = new ParkingLot(1);
-        ParkingLot parkingLotB = new ParkingLot(1);
-        ParkingLot parkingLotC = new ParkingLot(1);
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLot parkingLotA = new ParkingLot(3);
+        parkingLotA.park(new Car());
+        ParkingLot parkingLotB = new ParkingLot(3);
+        ParkingLot parkingLotC = new ParkingLot(3);
+        parkingLotC.park(new Car());
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
-        ParkResult result = graduateParkingBoy.park(car);
+        ParkResult result = smartParkingBoy.park(car);
 
         // Assert
-        assertThat(parkingLotA.pick(result.getTicket()).isSuccess()).isTrue();
+        assertThat(parkingLotB.pick(result.getTicket()).isSuccess()).isTrue();
     }
 
     @Test
-    void should_return_packing_success_into_C_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_A_and_B_do_not_have_free_parking_place_And_C_has_free_parking() {
+    void should_return_packing_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_A_B_have_the_same_most_empty_parking_spaces() {
         // Arrange
-        ParkingLot parkingLotA = new ParkingLot(1);
-        parkingLotA.park(new Car());
+        ParkingLot parkingLotA = new ParkingLot(3);
 
-        ParkingLot parkingLotB = new ParkingLot(1);
-        parkingLotB.park(new Car());
 
-        ParkingLot parkingLotC = new ParkingLot(100);
+        ParkingLot parkingLotB = new ParkingLot(3);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+
+        ParkingLot parkingLotC = new ParkingLot(3);
+        parkingLotC.park(new Car());
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Car car = new Car();
 
         // Act
-        graduateParkingBoy.park(car);
+        ParkResult result = smartParkingBoy.park(car);
 
         // Assert
-        assertThat(parkingLotC.park(car).isSuccess()).isTrue();
+        assertThat(parkingLotA.pick(result.getTicket()).isSuccess()).isTrue();
     }
 
     @Test
@@ -60,11 +60,11 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
-        ParkResult parkResult = graduateParkingBoy.park(car);
+        ParkResult parkResult = smartParkingBoy.park(car);
 
         // Assert
         assertThat(parkResult.isSuccess()).isFalse();
@@ -81,10 +81,10 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotB = new ParkingLot(1);
         ParkingLot parkingLotC = new ParkingLot(1);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
+        PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
 
         // Assert
         assertThat(pickResult.getCar()).isEqualTo(car);
@@ -101,10 +101,10 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         ParkResult parkResult = parkingLotC.park(car);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
+        PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
 
         // Assert
         assertThat(pickResult.getCar()).isEqualTo(car);
@@ -124,10 +124,10 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         ParkResult parkResult = parkingLotC.park(car);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
+        PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
 
         // Assert
         assertThat(pickResult.getCar()).isEqualTo(car);
@@ -145,12 +145,12 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Ticket fakeTicket = new Ticket();
 
         // Act
-        PickResult pickResult = graduateParkingBoy.pick(fakeTicket);
+        PickResult pickResult = smartParkingBoy.pick(fakeTicket);
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
@@ -168,11 +168,11 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         ParkResult parkResult = parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
-        graduateParkingBoy.pick(parkResult.getTicket());
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        smartParkingBoy.pick(parkResult.getTicket());
 
         // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
+        PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();

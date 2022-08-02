@@ -40,17 +40,4 @@ public class SmartParkingBoy extends GraduateParkingBoy{
         return maxCapacityParkingLots;
     }
 
-    public PickResult pick(Ticket ticket) {
-        PickResult pickResult = null;
-        for (ParkingLot parkingLot : parkingLots) {
-            PickResult itemResult = parkingLot.pick(ticket);
-            if (itemResult.isParkingLotTicket()) {
-                pickResult = itemResult;
-                break;
-            }
-            pickResult = itemResult;
-        }
-
-        return pickResult;
-    }
 }

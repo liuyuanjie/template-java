@@ -25,8 +25,4 @@ public class ParkResult {
     public Ticket getTicket() {
         return ticket;
     }
-
-    public String getMessage() {
-        return isSuccess() ? PACK_SUCCESSFULLY : PARKING_LOT_WAS_FULL_FAILED_TO_PACK;
-    }
 }

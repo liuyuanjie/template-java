@@ -6,17 +6,11 @@ import org.oobootcamp.status.PickStatus;
 import java.util.HashMap;
 
 public class ParkingLot {
-    private int totalParkingAmount;
+    private int capacity;
     private HashMap<Ticket, Car> parkedCars = new HashMap<>();
-    private String name;
 
-    public ParkingLot(int parkingAmount) {
-        this.totalParkingAmount = parkingAmount;
-    }
-
-    public ParkingLot(String name, int parkingAmount) {
-        this.name = name;
-        this.totalParkingAmount = parkingAmount;
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
     }
 
     ParkResult park(Car car) {
@@ -26,7 +20,7 @@ public class ParkingLot {
 
         car.park();
 
-        var ticket = new Ticket(this);
+        var ticket = new Ticket();
         parkedCars.put(ticket, car);
 
         return new ParkResult(ticket, ParkStatus.SUCCESS);
@@ -38,7 +32,7 @@ public class ParkingLot {
         }
 
         Car car = parkedCars.get(ticket);
-        if (car.hasPicked()) {
+        if (!car.GetInPacking()) {
             return new PickResult(PickStatus.EXPIRED_TICKET);
         }
 
@@ -47,13 +41,9 @@ public class ParkingLot {
         return new PickResult(car, PickStatus.VALID_TICKET);
     }
 
-    public String getName() {
-        return name;
-    }
-
     private boolean HasFreeParking() {
-        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> !x.hasPicked()).count();
+        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> x.GetInPacking()).count();
 
-        return inPackingAmount < totalParkingAmount;
+        return inPackingAmount < capacity;
     }
 }

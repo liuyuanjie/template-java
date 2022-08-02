@@ -3,11 +3,12 @@ package org.oobootcamp;
 import org.oobootcamp.status.ParkStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GraduateParkingBoy {
-    private ArrayList<ParkingLot> parkingLots;
+    private List<ParkingLot> parkingLots;
 
-    public GraduateParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    public GraduateParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 

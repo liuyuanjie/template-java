@@ -1,21 +1,17 @@
 package org.oobootcamp;
 
-import org.oobootcamp.status.CarStatus;
-
 public class Car {
-    private CarStatus carStatus;
+    private boolean inParking;
 
-    public void pick()
-    {
-        carStatus = CarStatus.PICKED;
+    public void pick() {
+        inParking = false;
     }
 
-    public void park()
-    {
-        carStatus = CarStatus.IN_PARKING;
+    public void park() {
+        inParking = true;
     }
 
-    public boolean hasPicked(){
-        return carStatus == CarStatus.PICKED;
+    public boolean GetInPacking() {
+        return inParking;
     }
 }

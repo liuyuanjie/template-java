@@ -8,7 +8,7 @@ import static org.oobootcamp.Constants.*;
 public class ParkingLotTest {
 
     @Test
-    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_has_100_parking_and_there_is_0_car() {
+    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_there_is_0_car() {
 
         // Arrange
         ParkingLot parkingLot = new ParkingLot(100);
@@ -18,12 +18,11 @@ public class ParkingLotTest {
         ParkResult parkResult = parkingLot.park(car);
 
         // Assert
-        assertThat(parkResult.isSuccess()).isTrue();
         assertThat(parkResult.getTicket()).isNotNull();
     }
 
     @Test
-    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_has_100_parking_and_there_is_1_car() {
+    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_there_is_1_car() {
         // Arrange
         ParkingLot parkingLot = new ParkingLot(100);
         parkingLot.park(new Car());
@@ -34,12 +33,11 @@ public class ParkingLotTest {
         ParkResult parkResult = parkingLot.park(car);
 
         // Assert
-        assertThat(parkResult.isSuccess()).isTrue();
         assertThat(parkResult.getTicket()).isNotNull();
     }
 
     @Test
-    void should_return_parking_failure_and_message_when_park_given_parking_lot_has_1_parking_and_there_is_1_car() {
+    void should_return_parking_failure_and_message_when_park_given_parking_lot_capacity_is_1_and_there_is_1_car() {
         // Arrange
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.park(new Car());
@@ -51,7 +49,6 @@ public class ParkingLotTest {
 
         // Assert
         assertThat(parkResult.isSuccess()).isFalse();
-        assertThat(parkResult.getMessage()).isEqualTo(PARKING_LOT_WAS_FULL_FAILED_TO_PACK);
     }
 
     @Test
@@ -75,14 +72,13 @@ public class ParkingLotTest {
         Car car = new Car();
         parkingLot.park(car);
 
-        Ticket fakeTicket = new Ticket(parkingLot);
+        Ticket fakeTicket = new Ticket();
 
         // Act
         PickResult pickResult = parkingLot.pick(fakeTicket);
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
-        assertThat(pickResult.getMessage()).isEqualTo(INVALID_TICKET_THE_CAR_CAN_NOT_BE_FOUND);
     }
 
     @Test
@@ -98,6 +94,5 @@ public class ParkingLotTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
-        assertThat(pickResult.getMessage()).isEqualTo(THIS_TICKET_HAS_EXPIRED_THE_CAR_HAS_BEEN_PICKED);
     }
 }

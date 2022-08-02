@@ -32,7 +32,7 @@ public class ParkingLot {
         }
 
         Car car = parkedCars.get(ticket);
-        if (!car.GetInPacking()) {
+        if (!car.ISCarInParking()) {
             return new PickResult(PickStatus.EXPIRED_TICKET);
         }
 
@@ -42,14 +42,15 @@ public class ParkingLot {
     }
 
     private boolean HasFreeParking() {
-        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> x.GetInPacking()).count();
-
-        return inPackingAmount < capacity;
+        return ParkingCarCount() < capacity;
     }
 
     public int remaindingSpace() {
-        int inPackingAmount = (int) parkedCars.values().stream().filter(x -> x.GetInPacking()).count();
+        return capacity - ParkingCarCount() ;
+    }
 
-        return capacity - inPackingAmount ;
+    private int ParkingCarCount()
+    {
+        return (int) parkedCars.values().stream().filter(x -> x.ISCarInParking()).count();
     }
 }

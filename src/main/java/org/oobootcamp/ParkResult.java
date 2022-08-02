@@ -2,9 +2,6 @@ package org.oobootcamp;
 
 import org.oobootcamp.status.ParkStatus;
 
-import static org.oobootcamp.Constants.PACK_SUCCESSFULLY;
-import static org.oobootcamp.Constants.PARKING_LOT_WAS_FULL_FAILED_TO_PACK;
-
 public class ParkResult {
     private Ticket ticket;
     private ParkStatus parkStatus;

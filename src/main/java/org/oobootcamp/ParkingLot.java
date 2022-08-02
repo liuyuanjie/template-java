@@ -9,12 +9,10 @@ public class ParkingLot {
     private int capacity;
     private HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-    }
+    public ParkingLot(int capacity) {this.capacity = capacity;}
 
     ParkResult park(Car car) {
-        if (!HasFreeParking()) {
+        if (!hasFreeParking()) {
             return new ParkResult(ParkStatus.FAILURE);
         }
 
@@ -41,16 +39,13 @@ public class ParkingLot {
         return new PickResult(car, PickStatus.VALID_TICKET);
     }
 
-    private boolean HasFreeParking() {
-        return ParkingCarCount() < capacity;
+    private boolean hasFreeParking() {return parkingCarAmount() < capacity;}
+
+    public int freeSpace() {
+        return capacity - parkingCarAmount();
     }
 
-    public int remaindingSpace() {
-        return capacity - ParkingCarCount() ;
-    }
-
-    private int ParkingCarCount()
-    {
+    private int parkingCarAmount() {
         return (int) parkedCars.values().stream().filter(x -> x.ISCarInParking()).count();
     }
 }

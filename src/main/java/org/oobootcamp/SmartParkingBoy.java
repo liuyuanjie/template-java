@@ -4,7 +4,7 @@ import org.oobootcamp.status.ParkStatus;
 
 import java.util.List;
 
-public class SmartParkingBoy extends GraduateParkingBoy{
+public class SmartParkingBoy extends GraduateParkingBoy {
 
 
     public SmartParkingBoy(List<ParkingLot> parkingLots) {
@@ -12,7 +12,7 @@ public class SmartParkingBoy extends GraduateParkingBoy{
     }
 
     public ParkResult park(Car car) {
-        ParkingLot parkingLot =  FindTheMostEmptyParkingLotWithOrderWhenRemadingSpaceIsTheSame();
+        ParkingLot parkingLot = FindFirstHasMostFreeSpaceParkingLot();
         ParkResult parkResult = parkingLot.park(car);
         if (parkResult.isSuccess()) {
             return parkResult;
@@ -21,23 +21,18 @@ public class SmartParkingBoy extends GraduateParkingBoy{
         return new ParkResult(ParkStatus.FAILURE);
     }
 
-    private ParkingLot FindTheMostEmptyParkingLotWithOrderWhenRemadingSpaceIsTheSame()
-    {
-         if(parkingLots ==null || parkingLots.size()<1)
-         {
-             return null;
-         }
+    private ParkingLot FindFirstHasMostFreeSpaceParkingLot() {
+        if (parkingLots == null || parkingLots.size() < 1) {
+            return null;
+        }
 
-         ParkingLot maxCapacityParkingLots = parkingLots.get(0);
-        for (ParkingLot parkingLot : parkingLots)
-        {
-            if(maxCapacityParkingLots.remaindingSpace() < parkingLot.remaindingSpace())
-            {
-                maxCapacityParkingLots = parkingLot;
+        ParkingLot parkingLot = parkingLots.get(0);
+        for (ParkingLot item : parkingLots) {
+            if (parkingLot.freeSpace() < item.freeSpace()) {
+                parkingLot = item;
             }
         }
 
-        return maxCapacityParkingLots;
+        return parkingLot;
     }
-
 }

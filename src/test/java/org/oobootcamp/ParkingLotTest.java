@@ -3,12 +3,11 @@ package org.oobootcamp;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.oobootcamp.Constants.*;
 
 public class ParkingLotTest {
 
     @Test
-    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_there_is_0_car() {
+    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_has_0_car() {
 
         // Arrange
         ParkingLot parkingLot = new ParkingLot(100);
@@ -22,7 +21,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_there_is_1_car() {
+    void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_has_1_car() {
         // Arrange
         ParkingLot parkingLot = new ParkingLot(100);
         parkingLot.park(new Car());
@@ -37,7 +36,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_parking_failure_and_message_when_park_given_parking_lot_capacity_is_1_and_there_is_1_car() {
+    void should_return_parking_failure_and_message_when_park_given_parking_lot_capacity_is_1_and_has_1_car() {
         // Arrange
         ParkingLot parkingLot = new ParkingLot(1);
         parkingLot.park(new Car());

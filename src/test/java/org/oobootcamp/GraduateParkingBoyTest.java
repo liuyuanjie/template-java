@@ -1,17 +1,15 @@
 package org.oobootcamp;
 
-import org.assertj.core.internal.bytebuddy.agent.builder.AgentBuilder;
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.status.PickStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.oobootcamp.Constants.*;
 
 public class GraduateParkingBoyTest {
     @Test
-    void should_return_packing_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_is_1() {
+    void should_return_packing_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_1_and_all_have_0_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
@@ -27,7 +25,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_return_packing_success_into_C_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_A_and_B_do_not_have_free_parking_place_And_C_has_free_parking() {
+    void should_return_packing_success_into_C_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_1_and_A_has_1_car_and_B_has_1_car_and_C_has_0_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
         parkingLotA.park(new Car());
@@ -35,21 +33,21 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotB = new ParkingLot(1);
         parkingLotB.park(new Car());
 
-        ParkingLot parkingLotC = new ParkingLot(100);
+        ParkingLot parkingLotC = new ParkingLot(1);
 
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Car car = new Car();
 
         // Act
-        graduateParkingBoy.park(car);
+        ParkResult result = graduateParkingBoy.park(car);
 
         // Assert
-        assertThat(parkingLotC.park(car).isSuccess()).isTrue();
+        assertThat(parkingLotC.pick(result.getTicket()).isSuccess()).isTrue();
     }
 
     @Test
-    void should_return_packing_failure_when_pack_given_parkingLots_A_B_C_in_order_and_all_of_A_B_and_C_do_not_have_free_parking() {
+    void should_return_packing_failure_when_pack_given_parkingLots_A_B_C_in_order_and_all_of_all_A_B_C_capacity_are_1_and_all_have_1_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
         parkingLotA.park(new Car());
@@ -71,7 +69,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_return_picking_success_when_pick_given_parkingLots_A_B_C_and_valid_parkingLot_A_ticket_and_car_was_in_parkingLot_A() {
+    void should_return_picking_success_when_pick_given_parkingLots_A_B_C_and_using_valid_ticket_and_car_was_in_parkingLots() {
         // Arrange
         Car car = new Car();
 
@@ -91,50 +89,7 @@ public class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_return_picking_success_when_pick_given_parkingLots_A_B_C_and_valid_parkingLot_C_ticket_and_car_was_in_parkingLot_C() {
-        // Arrange
-        Car car = new Car();
-
-        ParkingLot parkingLotA = new ParkingLot(1);
-        ParkingLot parkingLotB = new ParkingLot(1);
-
-        ParkingLot parkingLotC = new ParkingLot(1);
-        ParkResult parkResult = parkingLotC.park(car);
-
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
-
-        // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
-
-        // Assert
-        assertThat(pickResult.getCar()).isEqualTo(car);
-    }
-
-    @Test
-    void should_return_picking_success_when_pick_given_parkingLots_A_B_C_and_valid_ticket_and_car_was_not_in_parkingLot_A_B_and_C() {
-        // Arrange
-        Car car = new Car();
-
-        ParkingLot parkingLotA = new ParkingLot(1);
-        parkingLotA.park(new Car());
-
-        ParkingLot parkingLotB = new ParkingLot(1);
-        parkingLotB.park(new Car());
-
-        ParkingLot parkingLotC = new ParkingLot(1);
-        ParkResult parkResult = parkingLotC.park(car);
-
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
-
-        // Act
-        PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
-
-        // Assert
-        assertThat(pickResult.getCar()).isEqualTo(car);
-    }
-
-    @Test
-    void should_return_picking_failure_and_message_when_pick_given_parkingLots_A_B_C_and_invalid_ticket() {
+    void should_return_picking_failure_and_message_when_pick_given_parkingLots_A_B_C_and_using_invalid_ticket() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
         parkingLotA.park(new Car());
@@ -154,6 +109,7 @@ public class GraduateParkingBoyTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
+        assertThat(pickResult.getPickStatus()).isEqualTo(PickStatus.INVALID_TICKET);
     }
 
     @Test
@@ -176,5 +132,6 @@ public class GraduateParkingBoyTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
+        assertThat(pickResult.getPickStatus()).isEqualTo(PickStatus.EXPIRED_TICKET);
     }
 }

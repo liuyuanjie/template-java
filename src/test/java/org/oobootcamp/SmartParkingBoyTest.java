@@ -1,8 +1,7 @@
 package org.oobootcamp;
 
 import org.junit.jupiter.api.Test;
-import org.oobootcamp.IparkingWay.GraduateParkingWay;
-import org.oobootcamp.IparkingWay.SmartParkingWay;
+import org.oobootcamp.IparkingWay.SmartParking;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmartParkingBoyTest {
     @Test
-    void should_return_packing_success_into_B_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_A_has_1_car_B_has_0_car_and_C_has_1_car() {
+    void should_return_parking_success_into_B_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_A_has_1_car_B_has_0_car_and_C_has_1_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(3);
         parkingLotA.park(new Car());
@@ -18,7 +17,7 @@ public class SmartParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(3);
         parkingLotC.park(new Car());
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
@@ -29,14 +28,14 @@ public class SmartParkingBoyTest {
     }
 
     @Test
-    void should_return_packing_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_all_have_0_car() {
+    void should_return_parking_success_into_A_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_all_have_0_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(3);
         ParkingLot parkingLotB = new ParkingLot(3);
         ParkingLot parkingLotC = new ParkingLot(3);
         parkingLotC.park(new Car());
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
@@ -47,7 +46,7 @@ public class SmartParkingBoyTest {
     }
 
     @Test
-    void should_return_packing_failure_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_1_and_all_have_1_car() {
+    void should_return_parking_failure_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_1_and_all_have_1_car() {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
         parkingLotA.park(new Car());
@@ -56,7 +55,7 @@ public class SmartParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
@@ -76,7 +75,7 @@ public class SmartParkingBoyTest {
 
         ParkingLot parkingLotB = new ParkingLot(1);
         ParkingLot parkingLotC = new ParkingLot(1);
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
         PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
@@ -95,7 +94,7 @@ public class SmartParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         ParkResult parkResult = parkingLotC.park(car);
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
         PickResult pickResult = smartParkingBoy.pick(parkResult.getTicket());
@@ -116,7 +115,7 @@ public class SmartParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Ticket fakeTicket = new Ticket();
 
@@ -138,7 +137,7 @@ public class SmartParkingBoyTest {
 
         ParkResult parkResult = parkingLotC.park(new Car());
 
-        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy smartParkingBoy = new ParkingLotBoy(new SmartParking(), List.of(parkingLotA, parkingLotB, parkingLotC));
         smartParkingBoy.pick(parkResult.getTicket());
 
         // Act

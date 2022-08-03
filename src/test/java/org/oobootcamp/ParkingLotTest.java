@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParkingLotTest {
-
     @Test
     void should_return_parking_success_and_return_ticket_when_park_given_parking_lot_capacity_is_100_and_has_0_car() {
 

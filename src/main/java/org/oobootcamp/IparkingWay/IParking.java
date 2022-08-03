@@ -6,6 +6,6 @@ import org.oobootcamp.ParkingLot;
 
 import java.util.List;
 
-public interface IParkingWay {
+public interface IParking {
     ParkResult park(Car car, List<ParkingLot> parkingLots);
 }

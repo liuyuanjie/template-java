@@ -9,17 +9,18 @@ public class ParkingLot {
     private int capacity;
     private HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
-    public ParkingLot(int capacity) {this.capacity = capacity;}
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+    }
 
     public ParkResult park(Car car) {
         if (!hasFreeParking()) {
             return new ParkResult(ParkStatus.FAILURE);
         }
 
-        car.park();
-
         var ticket = new Ticket();
         parkedCars.put(ticket, car);
+        ticket.park();
 
         return new ParkResult(ticket, ParkStatus.SUCCESS);
     }
@@ -29,23 +30,25 @@ public class ParkingLot {
             return new PickResult(PickStatus.INVALID_TICKET);
         }
 
-        Car car = parkedCars.get(ticket);
-        if (!car.isInParking()) {
+        if (!ticket.isInParking()) {
             return new PickResult(PickStatus.EXPIRED_TICKET);
         }
 
-        car.pick();
+        Car car = parkedCars.get(ticket);
+        ticket.pick();
 
         return new PickResult(car, PickStatus.VALID_TICKET);
     }
 
-    private boolean hasFreeParking() {return hasParkedSpaces() < capacity;}
+    private boolean hasFreeParking() {
+        return hasParkedSpaces() < capacity;
+    }
 
     public int freeSpace() {
         return capacity - hasParkedSpaces();
     }
 
     private int hasParkedSpaces() {
-        return (int) parkedCars.values().stream().filter(x -> x.isInParking()).count();
+        return (int) parkedCars.keySet().stream().filter(ticket -> ticket.isInParking()).count();
     }
 }

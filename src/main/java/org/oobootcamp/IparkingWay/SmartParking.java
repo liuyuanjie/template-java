@@ -19,7 +19,7 @@ public class SmartParking implements IParking {
     private ParkingLot firstHasMostFreeSpaceParkingLot(List<ParkingLot> parkingLots) {
         ParkingLot parkingLot = parkingLots.get(0);
         for (ParkingLot item : parkingLots) {
-            if (parkingLot.freeSpace() < item.freeSpace()) {
+            if (parkingLot.freeSpaceAmount() < item.freeSpaceAmount()) {
                 parkingLot = item;
             }
         }

@@ -2,6 +2,7 @@ package org.oobootcamp;
 
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.IparkingWay.SmartParking;
+import org.oobootcamp.status.PickStatus;
 
 import java.util.List;
 
@@ -124,6 +125,7 @@ public class SmartParkingBoyTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
+        assertThat(pickResult.getPickStatus()).isEqualTo(PickStatus.INVALID_TICKET);
     }
 
     @Test
@@ -145,5 +147,6 @@ public class SmartParkingBoyTest {
 
         // Assert
         assertThat(pickResult.isSuccess()).isFalse();
+        assertThat(pickResult.getPickStatus()).isEqualTo(PickStatus.EXPIRED_TICKET);
     }
 }

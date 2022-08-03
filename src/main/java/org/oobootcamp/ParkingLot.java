@@ -41,14 +41,14 @@ public class ParkingLot {
     }
 
     private boolean hasFreeParking() {
-        return hasParkedSpaces() < capacity;
+        return InParkingCarAmount() < capacity;
     }
 
-    public int freeSpace() {
-        return capacity - hasParkedSpaces();
+    public int freeSpaceAmount() {
+        return capacity - InParkingCarAmount();
     }
 
-    private int hasParkedSpaces() {
+    private int InParkingCarAmount() {
         return (int) parkedCars.keySet().stream().filter(ticket -> ticket.isInParking()).count();
     }
 }

@@ -1,7 +1,7 @@
 package org.oobootcamp.IparkingWay;
 
 import org.oobootcamp.Car;
-    import org.oobootcamp.ParkResult;
+import org.oobootcamp.ParkResult;
 import org.oobootcamp.ParkingLot;
 
 import java.util.List;

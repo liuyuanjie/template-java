@@ -11,7 +11,7 @@ public class Car {
         inParking = true;
     }
 
-    public boolean ISCarInParking() {
+    public boolean isInParking() {
         return inParking;
     }
 }

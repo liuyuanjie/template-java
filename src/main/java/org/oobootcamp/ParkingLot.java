@@ -11,7 +11,7 @@ public class ParkingLot {
 
     public ParkingLot(int capacity) {this.capacity = capacity;}
 
-    ParkResult park(Car car) {
+    public ParkResult park(Car car) {
         if (!hasFreeParking()) {
             return new ParkResult(ParkStatus.FAILURE);
         }
@@ -30,7 +30,7 @@ public class ParkingLot {
         }
 
         Car car = parkedCars.get(ticket);
-        if (!car.ISCarInParking()) {
+        if (!car.isInParking()) {
             return new PickResult(PickStatus.EXPIRED_TICKET);
         }
 
@@ -39,13 +39,13 @@ public class ParkingLot {
         return new PickResult(car, PickStatus.VALID_TICKET);
     }
 
-    private boolean hasFreeParking() {return parkingCarAmount() < capacity;}
+    private boolean hasFreeParking() {return hasParkedSpaces() < capacity;}
 
     public int freeSpace() {
-        return capacity - parkingCarAmount();
+        return capacity - hasParkedSpaces();
     }
 
-    private int parkingCarAmount() {
-        return (int) parkedCars.values().stream().filter(x -> x.ISCarInParking()).count();
+    private int hasParkedSpaces() {
+        return (int) parkedCars.values().stream().filter(x -> x.isInParking()).count();
     }
 }

@@ -1,6 +1,7 @@
 package org.oobootcamp;
 
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.IparkingWay.GraduateParkingWay;
 import org.oobootcamp.status.PickStatus;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotA = new ParkingLot(1);
         ParkingLot parkingLotB = new ParkingLot(1);
         ParkingLot parkingLotC = new ParkingLot(1);
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
@@ -35,7 +36,7 @@ public class GraduateParkingBoyTest {
 
         ParkingLot parkingLotC = new ParkingLot(1);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Car car = new Car();
 
@@ -58,7 +59,7 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
         Car car = new Car();
 
         // Act
@@ -79,7 +80,7 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotB = new ParkingLot(1);
         ParkingLot parkingLotC = new ParkingLot(1);
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         // Act
         PickResult pickResult = graduateParkingBoy.pick(parkResult.getTicket());
@@ -100,7 +101,7 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
 
         Ticket fakeTicket = new Ticket();
 
@@ -124,7 +125,7 @@ public class GraduateParkingBoyTest {
         ParkingLot parkingLotC = new ParkingLot(1);
         ParkResult parkResult = parkingLotC.park(new Car());
 
-        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(List.of(parkingLotA, parkingLotB, parkingLotC));
+        ParkingLotBoy graduateParkingBoy = new ParkingLotBoy(new GraduateParkingWay(), List.of(parkingLotA, parkingLotB, parkingLotC));
         graduateParkingBoy.pick(parkResult.getTicket());
 
         // Act

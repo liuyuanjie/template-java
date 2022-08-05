@@ -1,8 +1,5 @@
 package org.oobootcamp;
 
-import org.oobootcamp.status.ParkStatus;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class GraduateParkingBoy extends ParkingBoy{
@@ -10,18 +7,13 @@ public class GraduateParkingBoy extends ParkingBoy{
         super(parkingLots);
     }
 
-    public Ticket park(Car car) throws ParkFailException {
+    public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
         for (ParkingLot parkingLot : parkingLots) {
-            if(!parkingLot.HasFreeParking())
-            {
-                continue;
+            if (parkingLot.hasFreeParking()) {
+                return parkingLot.park(car);
             }
-
-            return parkingLot.park(car);
-
         }
 
-        throw new ParkFailException("Park failed. Parking lot is full.");
+        throw new ParkingLotIsFullParkingFailException();
     }
-
 }

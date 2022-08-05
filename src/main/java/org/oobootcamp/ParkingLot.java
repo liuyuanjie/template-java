@@ -1,62 +1,56 @@
 package org.oobootcamp;
 
-import org.oobootcamp.status.ParkStatus;
-import org.oobootcamp.status.PickStatus;
-
 import java.util.HashMap;
 
 public class ParkingLot {
-    private int capacity;
-    private HashMap<Ticket, Car> parkedCars = new HashMap<>();
+    private final int capacity;
+    private final HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 
-    Ticket park(Car car) throws ParkFailException {
-        if (!HasFreeParking()) {
-         throw new ParkFailException("Park failed. Parking lot is full.");
+    Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
+        if (!hasFreeParking()) {
+            throw new ParkingLotIsFullParkingFailException();
         }
 
-        car.park();
-
         var ticket = new Ticket();
+        ticket.park();
+
         parkedCars.put(ticket, car);
 
         return ticket;
     }
 
-    public Car pick(Ticket ticket) throws PickFailException {
+    public Car pick(Ticket ticket) throws PickingFailException {
         if (!parkedCars.containsKey(ticket)) {
-            throw new PickFailException("Pick failed. Invalid ticket.");
+            throw new InvalidTicketPickingFailException();
+        }
+
+        if (!ticket.isInParking()) {
+            throw new TicketHasBeenUsedPickingFailException();
         }
 
         Car car = parkedCars.get(ticket);
-        if (!car.ISCarInParking()) {
-            throw new PickFailException("Pick failed. ticket has been used.");
-        }
-
-        car.pick();
+        ticket.pick();
 
         return car;
     }
 
-    public boolean ContainsTicket(Ticket ticket)
-    {
+    public boolean ContainsTicket(Ticket ticket) {
         return parkedCars.containsKey(ticket);
-
     }
 
-    public boolean HasFreeParking() {
-        return ParkingCarCount() < capacity;
+    public boolean hasFreeParking() {
+        return ParkingCarAmount() < capacity;
     }
 
-    public int remaindingSpace() {
-        return capacity - ParkingCarCount() ;
+    public int freeSpaceAmount() {
+        return capacity - ParkingCarAmount();
     }
 
-    private int ParkingCarCount()
-    {
-        return (int) parkedCars.values().stream().filter(x -> x.ISCarInParking()).count();
+    private int ParkingCarAmount() {
+        return (int) parkedCars.keySet().stream().filter(Ticket::isInParking).count();
     }
 }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmartParkingBoyTest {
     @Test
-    void hould_return_parking_success_into_B_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_A_has_1_car_B_has_0_car_and_C_has_1_car() throws Exception {
+    void should_return_parking_success_into_B_and_return_ticket_when_pack_given_parkingLots_A_B_C_in_order_and_all_A_B_C_capacity_are_3_and_A_has_1_car_B_has_0_car_and_C_has_1_car() throws Exception {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(3);
         parkingLotA.park(new Car());

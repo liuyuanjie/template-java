@@ -4,7 +4,7 @@ import org.oobootcamp.status.ParkStatus;
 
 import java.util.List;
 
-public class SmartParkingBoy extends GraduateParkingBoy{
+public class SmartParkingBoy extends ParkingBoy{
 
 
     public SmartParkingBoy(List<ParkingLot> parkingLots) {

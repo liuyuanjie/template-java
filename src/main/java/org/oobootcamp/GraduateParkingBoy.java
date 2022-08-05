@@ -5,11 +5,9 @@ import org.oobootcamp.status.ParkStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraduateParkingBoy {
-    protected List<ParkingLot> parkingLots;
-
+public class GraduateParkingBoy extends ParkingBoy{
     public GraduateParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+        super(parkingLots);
     }
 
     public ParkResult park(Car car) {
@@ -23,17 +21,4 @@ public class GraduateParkingBoy {
         return new ParkResult(ParkStatus.FAILURE);
     }
 
-    public PickResult pick(Ticket ticket) {
-        PickResult pickResult = null;
-        for (ParkingLot parkingLot : parkingLots) {
-            PickResult itemResult = parkingLot.pick(ticket);
-            if (itemResult.isParkingLotTicket()) {
-                pickResult = itemResult;
-                break;
-            }
-            pickResult = itemResult;
-        }
-
-        return pickResult;
-    }
 }

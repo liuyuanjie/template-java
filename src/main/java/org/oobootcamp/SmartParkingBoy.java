@@ -10,14 +10,13 @@ public class SmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    protected ParkingLot firstAvailableParkingLot() {
+    protected ParkingLot findFirstAvailableParkingLot() {
         ParkingLot parkingLot = parkingLots.get(0);
         for (ParkingLot item : parkingLots) {
             if (parkingLot.parkingSpaceIsFreeAmount() < item.parkingSpaceIsFreeAmount()) {
                 parkingLot = item;
             }
         }
-
         return parkingLot;
     }
 }

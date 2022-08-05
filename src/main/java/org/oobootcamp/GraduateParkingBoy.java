@@ -10,7 +10,7 @@ public class GraduateParkingBoy extends ParkingBoy {
     }
 
     @Override
-    protected ParkingLot firstAvailableParkingLot(){
+    protected ParkingLot findFirstAvailableParkingLot(){
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.hasFreeParkingSpace()) {
                 return parkingLot;

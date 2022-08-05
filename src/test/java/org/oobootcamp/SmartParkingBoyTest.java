@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
-import org.oobootcamp.Exception.TicketHasPickedPickingFailException;
 
 import java.util.List;
 
@@ -170,6 +169,6 @@ public class SmartParkingBoyTest {
         smartParkingBoy.pick(ticket);
 
         // Assert
-        Assertions.assertThrows(TicketHasPickedPickingFailException.class, () -> smartParkingBoy.pick(ticket));
+        Assertions.assertThrows(InvalidTicketPickingFailException.class, () -> smartParkingBoy.pick(ticket));
     }
 }

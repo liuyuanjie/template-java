@@ -2,7 +2,6 @@ package org.oobootcamp;
 
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
-import org.oobootcamp.Exception.PickingFailException;
 
 import java.util.List;
 
@@ -14,15 +13,14 @@ public abstract class ParkingBoy {
     }
 
     public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
-        ParkingLot parkingLot = firstAvailableParkingLot();
+        ParkingLot parkingLot = findFirstAvailableParkingLot();
         if (parkingLot == null) {
             throw new ParkingLotIsFullParkingFailException();
         }
-
         return parkingLot.park(car);
     }
 
-    public Car pick(Ticket ticket) throws PickingFailException {
+    public Car pick(Ticket ticket) throws InvalidTicketPickingFailException {
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.IsValidTicket(ticket)) {
                 return parkingLot.pick(ticket);
@@ -32,5 +30,5 @@ public abstract class ParkingBoy {
         throw new InvalidTicketPickingFailException();
     }
 
-    protected abstract ParkingLot firstAvailableParkingLot() throws ParkingLotIsFullParkingFailException;
+    protected abstract ParkingLot findFirstAvailableParkingLot() throws ParkingLotIsFullParkingFailException;
 }

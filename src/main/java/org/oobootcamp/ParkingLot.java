@@ -2,8 +2,6 @@ package org.oobootcamp;
 
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
-import org.oobootcamp.Exception.PickingFailException;
-import org.oobootcamp.Exception.TicketHasPickedPickingFailException;
 
 import java.util.HashMap;
 
@@ -21,24 +19,19 @@ public class ParkingLot {
         }
 
         var ticket = new Ticket();
-        ticket.park();
 
         parkedCars.put(ticket, car);
 
         return ticket;
     }
 
-    public Car pick(Ticket ticket) throws PickingFailException {
+    public Car pick(Ticket ticket) throws InvalidTicketPickingFailException {
         if (!IsValidTicket(ticket)) {
             throw new InvalidTicketPickingFailException();
         }
 
-        if (ticket.hasPicked()) {
-            throw new TicketHasPickedPickingFailException();
-        }
-
         Car car = parkedCars.get(ticket);
-        ticket.pick();
+        parkedCars.remove(ticket);
 
         return car;
     }
@@ -48,14 +41,11 @@ public class ParkingLot {
     }
 
     public boolean hasFreeParkingSpace() {
-        return capacity > parkingSpaceIsInPackedAmount();
+        return capacity > parkedCars.size();
     }
 
     public int parkingSpaceIsFreeAmount() {
-        return capacity - parkingSpaceIsInPackedAmount();
+        return capacity - parkedCars.size();
     }
 
-    private int parkingSpaceIsInPackedAmount() {
-        return (int) parkedCars.keySet().stream().filter(Ticket::hasNotPicked).count();
-    }
 }

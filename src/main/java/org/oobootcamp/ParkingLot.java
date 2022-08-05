@@ -3,7 +3,7 @@ package org.oobootcamp;
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
 import org.oobootcamp.Exception.PickingFailException;
-import org.oobootcamp.Exception.TicketHasBeenUsedPickingFailException;
+import org.oobootcamp.Exception.TicketHasPickedPickingFailException;
 
 import java.util.HashMap;
 
@@ -34,7 +34,7 @@ public class ParkingLot {
         }
 
         if (ticket.hasPicked()) {
-            throw new TicketHasBeenUsedPickingFailException();
+            throw new TicketHasPickedPickingFailException();
         }
 
         Car car = parkedCars.get(ticket);

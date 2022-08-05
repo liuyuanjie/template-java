@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
-import org.oobootcamp.Exception.TicketHasBeenUsedPickingFailException;
+import org.oobootcamp.Exception.TicketHasPickedPickingFailException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -86,6 +86,6 @@ public class ParkingLotTest {
         parkingLot.pick(ticket);
 
         // Assert
-        Assertions.assertThrows(TicketHasBeenUsedPickingFailException.class, () -> parkingLot.pick(ticket));
+        Assertions.assertThrows(TicketHasPickedPickingFailException.class, () -> parkingLot.pick(ticket));
     }
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
-import org.oobootcamp.Exception.TicketHasBeenUsedPickingFailException;
+import org.oobootcamp.Exception.TicketHasPickedPickingFailException;
 
 import java.util.List;
 
@@ -122,6 +122,7 @@ public class GraduateParkingBoyTest {
     void should_return_picking_failure_and_message_when_pick_given_parkingLots_A_B_C_and_ticket_has_already_been_picked() throws Exception {
         // Arrange
         ParkingLot parkingLotA = new ParkingLot(1);
+
         parkingLotA.park(new Car());
         ParkingLot parkingLotB = new ParkingLot(1);
         parkingLotB.park(new Car());
@@ -132,6 +133,6 @@ public class GraduateParkingBoyTest {
         graduateParkingBoy.pick(ticket);
 
         // Assert
-        Assertions.assertThrows(TicketHasBeenUsedPickingFailException.class, () -> graduateParkingBoy.pick(ticket));
+        Assertions.assertThrows(TicketHasPickedPickingFailException.class, () -> graduateParkingBoy.pick(ticket));
     }
 }

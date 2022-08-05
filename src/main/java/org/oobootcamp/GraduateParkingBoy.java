@@ -9,19 +9,14 @@ public class GraduateParkingBoy extends ParkingBoy {
         super(parkingLots);
     }
 
-    public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
-        ParkingLot parkingLot = firstParkingLotHasFreeParkingSpace();
-
-        return parkingLot.park(car);
-    }
-
-    private ParkingLot firstParkingLotHasFreeParkingSpace() {
+    @Override
+    protected ParkingLot firstAvailableParkingLot(){
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.hasFreeParkingSpace()) {
                 return parkingLot;
             }
         }
 
-        return new ParkingLot(0);
+        return null;
     }
 }

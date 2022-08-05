@@ -13,7 +13,14 @@ public abstract class ParkingBoy {
         this.parkingLots = parkingLots;
     }
 
-    public abstract Ticket park(Car car) throws ParkingLotIsFullParkingFailException;
+    public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
+        ParkingLot parkingLot = firstAvailableParkingLot();
+        if (parkingLot == null) {
+            throw new ParkingLotIsFullParkingFailException();
+        }
+
+        return parkingLot.park(car);
+    }
 
     public Car pick(Ticket ticket) throws PickingFailException {
         for (ParkingLot parkingLot : parkingLots) {
@@ -24,4 +31,6 @@ public abstract class ParkingBoy {
 
         throw new InvalidTicketPickingFailException();
     }
+
+    protected abstract ParkingLot firstAvailableParkingLot() throws ParkingLotIsFullParkingFailException;
 }

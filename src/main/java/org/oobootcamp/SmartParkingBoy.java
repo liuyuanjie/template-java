@@ -9,13 +9,8 @@ public class SmartParkingBoy extends ParkingBoy {
         super(parkingLots);
     }
 
-    public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
-        ParkingLot parkingLot = firstParkingLotHasMostFreeSpace();
-
-        return parkingLot.park(car);
-    }
-
-    private ParkingLot firstParkingLotHasMostFreeSpace() {
+    @Override
+    protected ParkingLot firstAvailableParkingLot() {
         ParkingLot parkingLot = parkingLots.get(0);
         for (ParkingLot item : parkingLots) {
             if (parkingLot.parkingSpaceIsFreeAmount() < item.parkingSpaceIsFreeAmount()) {

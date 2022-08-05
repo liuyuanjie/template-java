@@ -47,7 +47,7 @@ public class ParkingLotTest {
         Car car = new Car();
 
         // Assert
-        Assertions.assertThrows(ParkingLotIsFullParkingFailException.class, () -> parkingLot.park(car), "Park failed. Parking lot is full.");
+        Assertions.assertThrows(ParkingLotIsFullParkingFailException.class, () -> parkingLot.park(car));
     }
 
     @Test
@@ -86,6 +86,6 @@ public class ParkingLotTest {
         parkingLot.pick(ticket);
 
         // Assert
-        Assertions.assertThrows(TicketHasBeenUsedPickingFailException.class, () -> parkingLot.pick(ticket), "Pick failed. ticket has been used.");
+        Assertions.assertThrows(TicketHasBeenUsedPickingFailException.class, () -> parkingLot.pick(ticket));
     }
 }

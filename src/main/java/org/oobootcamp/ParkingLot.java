@@ -1,5 +1,10 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Exception.InvalidTicketPickingFailException;
+import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
+import org.oobootcamp.Exception.PickingFailException;
+import org.oobootcamp.Exception.TicketHasBeenUsedPickingFailException;
+
 import java.util.HashMap;
 
 public class ParkingLot {
@@ -11,7 +16,7 @@ public class ParkingLot {
     }
 
     Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
-        if (!hasFreeParking()) {
+        if (!hasFreeParkingSpace()) {
             throw new ParkingLotIsFullParkingFailException();
         }
 
@@ -24,11 +29,11 @@ public class ParkingLot {
     }
 
     public Car pick(Ticket ticket) throws PickingFailException {
-        if (!parkedCars.containsKey(ticket)) {
+        if (!IsValidTicket(ticket)) {
             throw new InvalidTicketPickingFailException();
         }
 
-        if (!ticket.isInParking()) {
+        if (ticket.hasPicked()) {
             throw new TicketHasBeenUsedPickingFailException();
         }
 
@@ -38,19 +43,19 @@ public class ParkingLot {
         return car;
     }
 
-    public boolean ContainsTicket(Ticket ticket) {
+    public boolean IsValidTicket(Ticket ticket) {
         return parkedCars.containsKey(ticket);
     }
 
-    public boolean hasFreeParking() {
-        return ParkingCarAmount() < capacity;
+    public boolean hasFreeParkingSpace() {
+        return capacity > parkingSpaceIsInPackedAmount();
     }
 
-    public int freeSpaceAmount() {
-        return capacity - ParkingCarAmount();
+    public int parkingSpaceIsFreeAmount() {
+        return capacity - parkingSpaceIsInPackedAmount();
     }
 
-    private int ParkingCarAmount() {
-        return (int) parkedCars.keySet().stream().filter(Ticket::isInParking).count();
+    private int parkingSpaceIsInPackedAmount() {
+        return (int) parkedCars.keySet().stream().filter(Ticket::hasNotPicked).count();
     }
 }

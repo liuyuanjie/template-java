@@ -11,7 +11,11 @@ public class Ticket {
         inParking = true;
     }
 
-    public boolean isInParking() {
+    public boolean hasNotPicked() {
         return inParking;
+    }
+
+    public boolean hasPicked() {
+        return !inParking;
     }
 }

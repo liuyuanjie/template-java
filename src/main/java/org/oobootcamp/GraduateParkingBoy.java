@@ -1,5 +1,7 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
+
 import java.util.List;
 
 public class GraduateParkingBoy extends ParkingBoy{
@@ -9,7 +11,7 @@ public class GraduateParkingBoy extends ParkingBoy{
 
     public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.hasFreeParking()) {
+            if (parkingLot.hasFreeParkingSpace()) {
                 return parkingLot.park(car);
             }
         }

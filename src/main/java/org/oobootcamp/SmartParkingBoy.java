@@ -1,5 +1,7 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
+
 import java.util.List;
 
 public class SmartParkingBoy extends ParkingBoy {
@@ -19,7 +21,7 @@ public class SmartParkingBoy extends ParkingBoy {
     private ParkingLot firstParkingLotHasMostFreeSpace() {
         ParkingLot parkingLot = parkingLots.get(0);
         for (ParkingLot item : parkingLots) {
-            if (parkingLot.freeSpaceAmount() < item.freeSpaceAmount()) {
+            if (parkingLot.parkingSpaceIsFreeAmount() < item.parkingSpaceIsFreeAmount()) {
                 parkingLot = item;
             }
         }

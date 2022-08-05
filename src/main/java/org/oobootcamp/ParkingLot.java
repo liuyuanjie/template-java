@@ -13,9 +13,9 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    ParkResult park(Car car) {
+    Ticket park(Car car) throws ParkFailException {
         if (!HasFreeParking()) {
-            return new ParkResult(ParkStatus.FAILURE);
+         throw new ParkFailException("Park failed. Parking lot is full.");
         }
 
         car.park();
@@ -23,25 +23,31 @@ public class ParkingLot {
         var ticket = new Ticket();
         parkedCars.put(ticket, car);
 
-        return new ParkResult(ticket, ParkStatus.SUCCESS);
+        return ticket;
     }
 
-    public PickResult pick(Ticket ticket) {
+    public Car pick(Ticket ticket) throws PickFailException {
         if (!parkedCars.containsKey(ticket)) {
-            return new PickResult(PickStatus.INVALID_TICKET);
+            throw new PickFailException("Pick failed. Invalid ticket.");
         }
 
         Car car = parkedCars.get(ticket);
         if (!car.ISCarInParking()) {
-            return new PickResult(PickStatus.EXPIRED_TICKET);
+            throw new PickFailException("Pick failed. ticket has been used.");
         }
 
         car.pick();
 
-        return new PickResult(car, PickStatus.VALID_TICKET);
+        return car;
     }
 
-    private boolean HasFreeParking() {
+    public boolean ContainsTicket(Ticket ticket)
+    {
+        return parkedCars.containsKey(ticket);
+
+    }
+
+    public boolean HasFreeParking() {
         return ParkingCarCount() < capacity;
     }
 

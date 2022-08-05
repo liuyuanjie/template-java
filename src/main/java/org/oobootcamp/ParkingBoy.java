@@ -11,20 +11,21 @@ public abstract class ParkingBoy {
         this.parkingLots = parkingLots;
     }
 
-    public abstract ParkResult park(Car car) ;
+    public abstract Ticket park(Car car) throws ParkFailException;
 
 
-    public PickResult pick(Ticket ticket) {
-        PickResult pickResult = null;
+    public Car pick(Ticket ticket) throws PickFailException {
+        Car car = null;
         for (ParkingLot parkingLot : parkingLots) {
-            PickResult itemResult = parkingLot.pick(ticket);
-            if (itemResult.isParkingLotTicket()) {
-                pickResult = itemResult;
-                break;
+
+            if(!parkingLot.ContainsTicket(ticket))
+            {
+                continue;
             }
-            pickResult = itemResult;
+
+            return parkingLot.pick(ticket);
         }
 
-        return pickResult;
+        throw new PickFailException("Pick failed. Invalid ticket.");
     }
 }

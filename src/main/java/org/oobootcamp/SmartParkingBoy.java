@@ -11,14 +11,14 @@ public class SmartParkingBoy extends ParkingBoy{
         super(parkingLots);
     }
 
-    public ParkResult park(Car car) {
+    public Ticket park(Car car) throws ParkFailException {
         ParkingLot parkingLot =  FindTheMostEmptyParkingLotWithOrderWhenRemadingSpaceIsTheSame();
-        ParkResult parkResult = parkingLot.park(car);
-        if (parkResult.isSuccess()) {
-            return parkResult;
+        if(parkingLot == null)
+        {
+            throw new ParkFailException("Park failed. Parking lot is full.");
         }
 
-        return new ParkResult(ParkStatus.FAILURE);
+        return parkingLot.park(car);
     }
 
     private ParkingLot FindTheMostEmptyParkingLotWithOrderWhenRemadingSpaceIsTheSame()

@@ -10,15 +10,18 @@ public class GraduateParkingBoy extends ParkingBoy{
         super(parkingLots);
     }
 
-    public ParkResult park(Car car) {
+    public Ticket park(Car car) throws ParkFailException {
         for (ParkingLot parkingLot : parkingLots) {
-            ParkResult parkResult = parkingLot.park(car);
-            if (parkResult.isSuccess()) {
-                return parkResult;
+            if(!parkingLot.HasFreeParking())
+            {
+                continue;
             }
+
+            return parkingLot.park(car);
+
         }
 
-        return new ParkResult(ParkStatus.FAILURE);
+        throw new ParkFailException("Park failed. Parking lot is full.");
     }
 
 }

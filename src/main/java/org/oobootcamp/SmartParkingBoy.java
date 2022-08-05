@@ -11,9 +11,6 @@ public class SmartParkingBoy extends ParkingBoy {
 
     public Ticket park(Car car) throws ParkingLotIsFullParkingFailException {
         ParkingLot parkingLot = firstParkingLotHasMostFreeSpace();
-        if (parkingLot == null) {
-            throw new ParkingLotIsFullParkingFailException();
-        }
 
         return parkingLot.park(car);
     }

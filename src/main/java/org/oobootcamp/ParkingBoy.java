@@ -31,4 +31,8 @@ public abstract class ParkingBoy {
     }
 
     protected abstract ParkingLot findFirstAvailableParkingLot() throws ParkingLotIsFullParkingFailException;
+
+    public boolean hasFreeParkingSpace() {
+        return parkingLots.stream().filter(x -> x.hasFreeParkingSpace()).count() > 0;
+    }
 }

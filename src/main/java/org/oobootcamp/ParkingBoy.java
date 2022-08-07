@@ -33,6 +33,10 @@ public abstract class ParkingBoy {
     protected abstract ParkingLot findFirstAvailableParkingLot() throws ParkingLotIsFullParkingFailException;
 
     public boolean hasFreeParkingSpace() {
-        return parkingLots.stream().filter(x -> x.hasFreeParkingSpace()).count() > 0;
+        return parkingLots.stream().anyMatch(x -> x.hasFreeParkingSpace());
+    }
+
+    public boolean IsValidTicket(Ticket ticket) {
+        return parkingLots.stream().anyMatch(x -> x.IsValidTicket(ticket));
     }
 }

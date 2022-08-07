@@ -1,5 +1,6 @@
 package org.oobootcamp;
 
+import org.oobootcamp.Exception.InvalidTicketPickingFailException;
 import org.oobootcamp.Exception.ParkingLotIsFullParkingFailException;
 
 import java.util.List;
@@ -27,5 +28,21 @@ public class ParkingManager {
             }
         }
         throw new ParkingLotIsFullParkingFailException();
+    }
+
+    public Car pick(Ticket ticket) throws InvalidTicketPickingFailException {
+        for (ParkingBoy parkingBoy : parkingBoys) {
+            if (parkingBoy.IsValidTicket(ticket)) {
+                return parkingBoy.pick(ticket);
+            }
+        }
+
+        for (ParkingLot parkingLot : parkingLots) {
+            if(parkingLot.IsValidTicket(ticket)){
+                return parkingLot.pick(ticket);
+            }
+        }
+
+        throw new InvalidTicketPickingFailException();
     }
 }
